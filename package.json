@@ -1,0 +1,22 @@
+{
+  "name": "gas-integrations",
+  "description": "High-level integrations for Google Apps Script (Sheets, Docs, etc.)",
+  "main": "dist/code.js",
+  "author": "Huy Nguyen <patrick204nqh@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "login": "npx clasp login",
+    "clone": "npx clasp clone",
+    "pull": "npx clasp pull",
+    "push": "npx clasp push",
+    "deploy": "npx clasp deploy"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.5.0",
+    "@types/google-apps-script": "^1.0.93",
+    "rollup": "^4.34.6",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.7.3"
+  }
+}
