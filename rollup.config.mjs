@@ -13,7 +13,8 @@ export default {
     resolve(),
     commonjs(),
     typescript({
-      tsconfig: "tsconfig.json"
+      tsconfig: "tsconfig.json",
+      clean: true
     })
   ]
 };
