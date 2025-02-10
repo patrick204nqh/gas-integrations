@@ -1,4 +1,4 @@
-import { logError } from '../utils/Logger';
+import { logError } from "../utils/Logger";
 
 export default class SheetService {
   private spreadsheetId: string;

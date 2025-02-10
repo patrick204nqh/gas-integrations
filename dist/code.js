@@ -5,7 +5,7 @@ function logWarn(message) {
     Logger.log(`[WARN] ${message}`);
 }
 function logError(message, stack) {
-    Logger.log(`[ERROR] ${message} ${stack ? '\n' + stack : ''}`);
+    Logger.log(`[ERROR] ${message} ${stack ? "\n" + stack : ""}`);
 }
 
 class SheetService {
@@ -133,5 +133,5 @@ globalThis.GasIntegrations = {
     logWarn: logWarn,
     logError: logError,
     newSheetService: newSheetService,
-    newDocService: newDocService
+    newDocService: newDocService,
 };

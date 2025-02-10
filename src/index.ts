@@ -9,5 +9,5 @@ import { newDocService } from "./docs/DocFactory";
   logWarn: logWarn,
   logError: logError,
   newSheetService: newSheetService,
-  newDocService: newDocService
+  newDocService: newDocService,
 };
