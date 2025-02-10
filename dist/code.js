@@ -1,14 +1,14 @@
-class Helpers {
-    static log(message) {
-        Logger.log(message);
-    }
-    static handleError(e) {
-        Logger.log("Error: " + e.toString());
-        throw e;
-    }
+function logInfo(message) {
+    Logger.log(`[INFO] ${message}`);
+}
+function logWarn(message) {
+    Logger.log(`[WARN] ${message}`);
+}
+function logError(message, stack) {
+    Logger.log(`[ERROR] ${message} ${stack ? '\n' + stack : ''}`);
 }
 
-class SheetIntegration {
+class SheetService {
     constructor(spreadsheetId) {
         this.spreadsheetId = spreadsheetId;
         this.ss = SpreadsheetApp.openById(spreadsheetId);
@@ -26,7 +26,7 @@ class SheetIntegration {
             return sheet.getRange(range).getValues();
         }
         catch (e) {
-            Helpers.log(`readData error: ${e.message}`);
+            logError(`readData error: ${e.message}`);
             throw e;
         }
     }
@@ -36,7 +36,7 @@ class SheetIntegration {
             sheet.getRange(range).setValues(values);
         }
         catch (e) {
-            Helpers.log(`writeData error: ${e.message}`);
+            logError(`writeData error: ${e.message}`);
             throw e;
         }
     }
@@ -46,7 +46,7 @@ class SheetIntegration {
             sheet.appendRow(values);
         }
         catch (e) {
-            Helpers.log(`appendRow error: ${e.message}`);
+            logError(`appendRow error: ${e.message}`);
             throw e;
         }
     }
@@ -58,7 +58,7 @@ class SheetIntegration {
             range.setValues([values]);
         }
         catch (e) {
-            Helpers.log(`insertRow error: ${e.message}`);
+            logError(`insertRow error: ${e.message}`);
             throw e;
         }
     }
@@ -68,7 +68,7 @@ class SheetIntegration {
             sheet.getRange(range).clearContent();
         }
         catch (e) {
-            Helpers.log(`clearRange error: ${e.message}`);
+            logError(`clearRange error: ${e.message}`);
             throw e;
         }
     }
@@ -78,7 +78,7 @@ class SheetIntegration {
             sheet.getRange(cell).setValue(value);
         }
         catch (e) {
-            Helpers.log(`updateCell error: ${e.message}`);
+            logError(`updateCell error: ${e.message}`);
             throw e;
         }
     }
@@ -88,7 +88,7 @@ class SheetIntegration {
             sheet.getRange(range).setBackground(color);
         }
         catch (e) {
-            Helpers.log(`setBackgroundColor error: ${e.message}`);
+            logError(`setBackgroundColor error: ${e.message}`);
             throw e;
         }
     }
@@ -98,13 +98,17 @@ class SheetIntegration {
             return sheet.getLastRow();
         }
         catch (e) {
-            Helpers.log(`getLastRow error: ${e.message}`);
+            logError(`getLastRow error: ${e.message}`);
             throw e;
         }
     }
 }
 
-class DocIntegration {
+function newSheetService(spreadsheetId) {
+    return new SheetService(spreadsheetId);
+}
+
+class DocService {
     constructor(documentId) {
         this.documentId = documentId;
         this.doc = DocumentApp.openById(documentId);
@@ -120,8 +124,14 @@ class DocIntegration {
     }
 }
 
+function newDocService(documentId) {
+    return new DocService(documentId);
+}
+
 globalThis.GasIntegrations = {
-    Sheets: SheetIntegration,
-    Docs: DocIntegration,
-    Helpers: Helpers
+    logInfo: logInfo,
+    logWarn: logWarn,
+    logError: logError,
+    newSheetService: newSheetService,
+    newDocService: newDocService
 };

@@ -1,6 +1,6 @@
-import Helpers from '../utils/Helpers';
+import { logError } from '../utils/Logger';
 
-export default class SheetIntegration {
+export default class SheetService {
   private spreadsheetId: string;
   private ss: GoogleAppsScript.Spreadsheet.Spreadsheet;
 
@@ -37,7 +37,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       return sheet.getRange(range).getValues();
     } catch (e: any) {
-      Helpers.log(`readData error: ${e.message}`);
+      logError(`readData error: ${e.message}`);
       throw e;
     }
   }
@@ -53,7 +53,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       sheet.getRange(range).setValues(values);
     } catch (e: any) {
-      Helpers.log(`writeData error: ${e.message}`);
+      logError(`writeData error: ${e.message}`);
       throw e;
     }
   }
@@ -68,7 +68,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       sheet.appendRow(values);
     } catch (e: any) {
-      Helpers.log(`appendRow error: ${e.message}`);
+      logError(`appendRow error: ${e.message}`);
       throw e;
     }
   }
@@ -88,7 +88,7 @@ export default class SheetIntegration {
       const range = sheet.getRange(rowIndex, 1, 1, values.length);
       range.setValues([values]);
     } catch (e: any) {
-      Helpers.log(`insertRow error: ${e.message}`);
+      logError(`insertRow error: ${e.message}`);
       throw e;
     }
   }
@@ -103,7 +103,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       sheet.getRange(range).clearContent();
     } catch (e: any) {
-      Helpers.log(`clearRange error: ${e.message}`);
+      logError(`clearRange error: ${e.message}`);
       throw e;
     }
   }
@@ -119,7 +119,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       sheet.getRange(cell).setValue(value);
     } catch (e: any) {
-      Helpers.log(`updateCell error: ${e.message}`);
+      logError(`updateCell error: ${e.message}`);
       throw e;
     }
   }
@@ -135,7 +135,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       sheet.getRange(range).setBackground(color);
     } catch (e: any) {
-      Helpers.log(`setBackgroundColor error: ${e.message}`);
+      logError(`setBackgroundColor error: ${e.message}`);
       throw e;
     }
   }
@@ -150,7 +150,7 @@ export default class SheetIntegration {
       const sheet = this.getSheetByName(sheetName);
       return sheet.getLastRow();
     } catch (e: any) {
-      Helpers.log(`getLastRow error: ${e.message}`);
+      logError(`getLastRow error: ${e.message}`);
       throw e;
     }
   }

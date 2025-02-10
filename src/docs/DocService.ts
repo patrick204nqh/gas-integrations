@@ -1,4 +1,4 @@
-export default class DocIntegration {
+export default class DocService {
   private documentId: string;
   private doc: GoogleAppsScript.Document.Document;
 
